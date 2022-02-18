@@ -3,7 +3,7 @@
    # Licensed under the Apache License, Version 2.0 (the "License");
    # you may not use this file except in compliance with the License.
    # You may obtain a copy of the License at
-   # http://www.apache.org/licenses/LICENSE-2.0 
+   # http://www.apache.org/licenses/LICENSE-2.0
 """portfolio URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,9 +21,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 import jobs.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', jobs.views.homepage, name='home'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
